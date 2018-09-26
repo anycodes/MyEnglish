@@ -90,7 +90,7 @@ def index(request):
     pageNum = request.GET.get("page",1)
 
     dataList = MemorySentence.models.Sentence.objects.all().order_by("-sid")
-    paginator = Paginator(dataList, 20)
+    paginator = Paginator(dataList, 10)
     # 对传递过来的页面进行判断，页码最小为1，最大为分页器所得总页数
     if pageNum < 0:
         pageNum = 1
@@ -136,10 +136,13 @@ def input(request):
                 date = models.DateTimeField(auto_now_add=True, verbose_name="存入时间")
                 remark = models.CharField(max_length=150, verbose_name="备注说明")
                '''
-                MemorySentence.models.Sentence.objects.create(
-                    content = englishSentence,
-                    chinese = chinese,
-                    wav = name,
-                )
+                try:
+                    MemorySentence.models.Sentence.objects.create(
+                        content = englishSentence,
+                        chinese = chinese,
+                        wav = name,
+                    )
+                except:
+                    pass
 
     return render(request, "input.html", locals())
