@@ -88,7 +88,10 @@ def textToVoiceFun(textData):
 def index(request):
 
     pageNum = request.GET.get("page",1)
-
+    try:
+        pageNum = int(pageNum)
+    except:
+        pageNum = 1
     dataList = MemorySentence.models.Sentence.objects.all().order_by("-sid")
     paginator = Paginator(dataList, 10)
     # 对传递过来的页面进行判断，页码最小为1，最大为分页器所得总页数
