@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>背单词神器</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h3>My English</h3>
+</center>
+<hr>
+{% for foo in pageList %}
+    <p>
+        <audio id="word{{ foo.sid }}">
+            <source src="/wav/{{ foo.wav }}.wav" type="audio/wav">
+        </audio>
+    <center>- {{ foo.sid }} -</center>
+    <a href="#" onclick="bn{{ foo.sid }}()"> {{ foo.content }}</a><br>
+    {{ foo.chinese }}<br>
+    <script>
+        bn{{ foo.sid }} = function () {
+            document.getElementById("word{{ foo.sid }}").play();
+        }
+    </script>
+    </p>
+{% endfor %}
+
+<hr>
+<center>
+    {% if pageList.number|add:-1 < 1 %}
+        <a>Prev</a>
+    {% else %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-1 }}">Prev</a>
+    {% endif %}
+    {% if pageList.number|add:-5 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-5 }}">{{ pageList.number|add:-5 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-4 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-4 }}">{{ pageList.number|add:-4 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-3 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-3 }}">{{ pageList.number|add:-3 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-2 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-2 }}">{{ pageList.number|add:-2 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-1 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-1 }}">{{ pageList.number|add:-1 }}</a>
+    {% endif %}
+    <a href="#" class="page active"><font color="red">{{ pageList.number }}</font></a>
+    {% if pageList.number|add:1 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:1 }}">{{ pageList.number|add:1 }}</a>
+    {% endif %}
+    {% if pageList.number|add:2 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:2 }}">{{ pageList.number|add:2 }}</a>
+    {% endif %}
+    {% if pageList.number|add:3 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:3 }}">{{ pageList.number|add:3 }}</a>
+    {% endif %}
+    {% if pageList.number|add:4 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:4 }}">{{ pageList.number|add:4 }}</a>
+    {% endif %}
+    {% if pageList.number|add:5 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:5 }}">{{ pageList.number|add:5 }}</a>
+    {% endif %}
+    {% if pageList.number|add:1 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:1 }}">Next</a>
+    {% else %}
+        <a href="">Next</a>
+    {% endif %}
+</center>
+<br><br>
+<center>
+    <small>Powered by <a href="http://www.0duzhan.com">DfounderLiu</a></small>
+</center>
+
+
+</body>
+</html>
