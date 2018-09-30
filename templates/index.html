@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>背单词神器</title>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h3>My English Country</h3>
+</center>
+
+{% for foo in pageList %}
+    <div style="border:1px solid #bfd1eb;background:#f3faff">
+    <p>
+        <audio id="word{{ foo.sid }}">
+            <source src="/wav/{{ foo.wav }}.wav" type="audio/wav">
+        </audio>
+
+    <a href="#" onclick="fun{{ foo.sid }}()">[Chinese]</a>&nbsp;|&nbsp;<a href="#" onclick="bn{{ foo.sid }}()"> {{ foo.content }}</a>
+
+    <script>
+        bn{{ foo.sid }} = function () {
+            document.getElementById("word{{ foo.sid }}").play();
+        }
+    </script>
+    <script>
+        fun{{ foo.sid }} = function () {
+                alert("{{ foo.chinese }}");
+            }
+    </script>
+    </p>
+    </div>
+    <br>
+{% endfor %}
+
+<center>
+    {% if pageList.number|add:-1 < 1 %}
+        <a>Prev</a>
+    {% else %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-1 }}">Prev</a>
+    {% endif %}
+    {% if pageList.number|add:-5 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-5 }}">{{ pageList.number|add:-5 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-4 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-4 }}">{{ pageList.number|add:-4 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-3 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-3 }}">{{ pageList.number|add:-3 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-2 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-2 }}">{{ pageList.number|add:-2 }}</a>
+    {% endif %}
+    {% if pageList.number|add:-1 > 0 %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:-1 }}">{{ pageList.number|add:-1 }}</a>
+    {% endif %}
+    <a href="#" class="page active"><font color="red">{{ pageList.number }}</font></a>
+    {% if pageList.number|add:1 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:1 }}">{{ pageList.number|add:1 }}</a>
+    {% endif %}
+    {% if pageList.number|add:2 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:2 }}">{{ pageList.number|add:2 }}</a>
+    {% endif %}
+    {% if pageList.number|add:3 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:3 }}">{{ pageList.number|add:3 }}</a>
+    {% endif %}
+    {% if pageList.number|add:4 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:4 }}">{{ pageList.number|add:4 }}</a>
+    {% endif %}
+    {% if pageList.number|add:5 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:5 }}">{{ pageList.number|add:5 }}</a>
+    {% endif %}
+    {% if pageList.number|add:1 <= pageList.paginator.num_pages %}
+        <a href="?{% if category %}cate={{ category }}&{% endif %}{% if tag %}tag={{ tag }}&{% endif %}page={{ pageList.number|add:1 }}">Next</a>
+    {% else %}
+        <a href="">Next</a>
+    {% endif %}
+</center>
+<br>
+<center>
+    <small>Powered by <a href="http://0duzhan.com">DfounderLiu</a><br>
+    Get Source From <a href="https://github.com/anycodes/MyEnglish">Github/Anycodes</a></small>
+</center>
+
+
+</body>
+</html>
